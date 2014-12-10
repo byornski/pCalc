@@ -1,13 +1,14 @@
 module int_stack
   use bigintops
 
-
+  !Single node of the stack
   type node
      type(node), pointer :: last
 !     integer :: val
      type(bigint) :: val
   end type node
 
+  !A linked list of items. Pointer kept to the top item
   type :: IntStack
      integer :: num_items = 0
      type(node), pointer :: cur
@@ -17,15 +18,12 @@ module int_stack
      procedure :: Peek => intstack_peek
   end type IntStack
 
-!  interface IntStack
-!     module procedure intstack_new
-!  end interface
-
 
 
 
 contains
 
+  !Generate new stack
   subroutine intstack_new(this)
     class(IntStack), intent(inout) :: this
     this%num_items = 0
@@ -33,7 +31,7 @@ contains
   end subroutine intstack_new
 
 
-
+  !Push items on to the stack
   subroutine intstack_push(this,val)
     class(IntStack), intent(inout) :: this
     type(bigint), intent(in) :: val
@@ -50,9 +48,9 @@ contains
     this%num_items = this%num_items + 1
   end subroutine intstack_push
 
+  !Pop items off the stack
   type(bigint) function intstack_pop(this)
     class(IntStack), intent(inout) :: this
-    
     !Check stack not empty...
     if (this%num_items .eq.0) then
        STOP 'stack empty'
@@ -62,6 +60,7 @@ contains
     this%num_items = this%num_items - 1
   end function intstack_pop
 
+  !Peek at top item on the stack
   type(bigint) function intstack_peek(this)
     class(IntStack), intent(inout) :: this
     !Check stack not empty...

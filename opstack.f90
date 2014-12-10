@@ -2,12 +2,12 @@ module operatorstack
   use operators
 
 
+  !Stack of operators......... bit hacky right now
+
   type opptr
      type(op), pointer :: p
   end type opptr
   
-
-
   integer, parameter :: stacksize = 200
   type(opptr), dimension(stacksize) :: opstack
   integer :: on_stack = 0

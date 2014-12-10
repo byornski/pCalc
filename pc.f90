@@ -31,25 +31,29 @@ program pcalc
 
 
   else
-     datastr = "" 
- 
+
+     !Otherwise just loop until we reach an exit
+     datastr = ""  
      do
   
         write(*,'(A)',advance='no') 'Input : '
         read(*,'(A)', iostat=iostat) datastr
         
+        !Exit conditions
         if (iostat.ne.0) then
            write(*,*)
            exit
         end if
         if (trim(datastr).eq.'exit') exit
-
         if (trim(datastr).eq.'') cycle
 
 
         
         write(*,'(A)',advance='no') 'Result: '
+
+        !Now to actually do a calculation....
         ans= ParseStr(datastr)
+
         write(*,*) trim(BigIntStr(ans))
      end do
   end if
@@ -61,14 +65,7 @@ program pcalc
   
 contains
 
-  character(len=50) function IntToStr(int) result(res)
-    integer, intent(in) :: int
-    write(res,*) int
-    res = adjustl(res)
-  end function IntToStr
-
-
-
+  !Parse input strings, and return the answer
   type(bigint) function ParseStr(datastr)
     character(len=*) :: datastr
     type(Token), dimension(:), allocatable :: ts    
@@ -83,17 +80,16 @@ contains
        call PrintTokens(ts)
     end if
 
+    !Finally work out the answer by evaluating the RPN
     ParseStr = EvalRPN(ts)
 
   end function ParseStr
 
+  !Debug function to see RPN form
   subroutine PrintTokens(tks)
     type(Token), dimension(:) :: tks
-
     integer :: i
-    
     write(*,'(A)',advance='no') 'RPN: '
-
     do i=1,size(tks)
        select case(tks(i)%tokentype)
        case(tt_value)
@@ -104,20 +100,15 @@ contains
           write(*,*) "??"
        end select
     end do
-
     write(*,*)
-
-
-
-
   end subroutine PrintTokens
 
 
+  !Evaluate the Reverse Polish Notation
   type(bigint) function EvalRPN(tokens)
     type(Token), dimension(:) :: tokens
     type(intstack) :: is
     
-
     integer :: num_tokens
     integer ::  i
     type(bigint) :: a,b,c
@@ -137,12 +128,12 @@ contains
          call is%push(c)
       end if
     end do
-
+    !Top value on stack should be the answer
     evalrpn = is%pop()
-
   end function EvalRPN
 
 
+  !Djikstra's shunt yard algorithm to turn infix into postfix
   subroutine ShuntYard(tokens)
     type(Token), dimension(:), allocatable :: tokens
     type(Token), dimension(:), allocatable :: SortedTokens
@@ -167,7 +158,7 @@ contains
           SortedTokens(outtokenscount) = tokens(i)
 
        case(tt_operator)
-
+          !Too long to explain -- see wikipedia case for if it's an operator
           do
              if (on_stack .lt. 1) exit
 
@@ -197,10 +188,8 @@ contains
           do
              if (on_stack .lt. 1) STOP 'Unmatched parens'
              tmp_op => PopOp()
-
              if (tmp_op%symbol .eq. '(') exit
              outtokenscount = outtokenscount + 1
-
              SortedTokens(outtokenscount)%tokentype  = tt_operator
              SortedTokens(outtokenscount)%op => tmp_op
           end do
@@ -217,19 +206,15 @@ contains
        SortedTokens(outtokenscount)%op => tmp_op
     end do
 
-
-    !Now reallocate tokens
+    !Now reallocate tokens having removed all ()s
     deallocate(tokens)
     allocate(tokens(outtokenscount))
     tokens = SortedTokens(1:outtokenscount)
-
     
   end subroutine ShuntYard
 
-
-
   
-
+  !Split input string by spaces and 'type' into tokens
   subroutine TokenizeString(strVal,tokens)
     character(len=*), intent(in) :: strVal
     type(Token), dimension(:), allocatable :: tokens
@@ -238,7 +223,7 @@ contains
     
     tokencount = 0
     i=1
-    !Count non-connected spaces....
+    !First count the tokens 
 strloop:    do 
        do while(IsSpace(strVal(i:i)))
           !cycle...
@@ -262,7 +247,6 @@ strloop:    do
     end do strloop
 
     allocate(tokens(tokencount))
-
 
     tokencount = 0
     wordstart = 1
@@ -294,12 +278,12 @@ strloop2:    do
     
   end subroutine TokenizeString
 
+  !Turn strval into a token of the right type
   type(Token) function NewToken(strVal)
     character(len=*), intent(in) :: strVal
     integer :: opnum
     integer :: i
     logical :: is_numeric
-
 
     !Check if numeric
     is_numeric = .true.
@@ -313,9 +297,7 @@ strloop2:    do
        end select
     end do
 
-
     opnum = OperatorNumber(strVal(1:1))    
-
     nullify(NewToken%op)
     
     if(opnum .gt. 0) then
