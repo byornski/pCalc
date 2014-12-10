@@ -21,6 +21,6 @@ dist: deps
 deps: pCalc
 	./makedeps.sh > pCalc.deps
 clean:
-	@rm -f *.o *.mod *.obj pCalc
+	rm -f *.o *.mod *.obj pCalc
 cleanall: clean
 	rm -f *~
