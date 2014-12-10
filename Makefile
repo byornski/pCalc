@@ -8,15 +8,6 @@ LDFLAGS = -static-libgfortran
 pCalc: pc.o
 	$(FC) -o $@ $(LDFLAGS) $(FFLAGS) *.o
 
-#pc.o pc.mod: pc.f90 tokens.mod operators.mod operatorstack.mod int_stack.mod \
- bigintops.mod
-#bigint.o bigintops.mod: bigint.f90 biginttype.mod
-#bigintdef.o biginttype.mod: bigintdef.f90
-#intstack.o int_stack.mod: intstack.f90 bigintops.mod
-#operators.o operators.mod: operators.f90 bigintops.mod
-#opstack.o operatorstack.mod: opstack.f90 operators.mod
-#token.o tokens.mod: token.f90 operators.mod biginttype.mod
-
 include pCalc.deps
 
 
