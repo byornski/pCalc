@@ -5,22 +5,27 @@ FC = gfortran
 FFLAGS = -g -O3 -fdefault-integer-8 -std=f2003 -fimplicit-none
 LDFLAGS = -static-libgfortran
 
-pCalc: pc.o
-	$(FC) -o $@ $(LDFLAGS) $(FFLAGS) *.o
+src_dir = src
+bin_dir = obj
 
-include pCalc.deps
-
-
-%.o %.mod: 
-	$(FC) -c $(FFLAGS) $<
+export 
 
 
+pCalc: $(bin_dir)/deps
+	cd $(bin_dir);	$(MAKE)
 
-.PHONY: clean cleanall deps dist
-dist: deps
-deps: pCalc
-	./makedeps.sh > pCalc.deps
+$(bin_dir)/deps: $(src_dir)/*.f90 $(src_dir)/makedeps.sh
+	$(src_dir)/makedeps.sh > $@
+
+
+
+
+
+
+.PHONY: clean cleanall 
+
 clean:
-	rm -f *.o *.mod *.obj pCalc
+	cd $(bin_dir); rm -f *.mod *.o deps
+	rm -f pCalc
 cleanall: clean
-	rm -f *~
+	cd $(src_dir); rm -f *~
