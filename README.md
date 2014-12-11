@@ -5,19 +5,33 @@ Fortran command line calculator which parses tokens into Reverse Polish Notation
 
 [byornski ~/pCalc]$ ./pCalc
 Input : 3+4+5*17
+
 Result:  92
+
 Input : 5^200
+
 Result:  62230152778611417071440640537801242405902521687211671331011166147896988340353834411839448231257136169569665895551224821247160434722900390625
+
 Input : 2+4*5
+
 Result:  22
+
 Input : (2+4)*5
+
 Result:  30
+
 Input : 17 / 3
+
 Result:  5
+
 [byornski ~/pCalc]$ ./pCalc 4 + 5
+
  9
+ 
 [byornski ~/pCalc]$ ./pCalc "17^20"
+
  4064231406647572522401601
+
 
 
 Uses a bigint library of my own creation. The values are unbounded (up to 10000000^(int64_huge)) and you will run out of memory before you hit this.
