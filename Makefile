@@ -25,7 +25,7 @@ $(bin_dir)/deps: $(src_dir)/*.f90 $(src_dir)/makedeps.sh
 .PHONY: clean cleanall 
 
 clean:
-	cd $(bin_dir); rm -f *.mod *.o deps
+	cd $(bin_dir); find . -not -name "Makefile" -type f | xargs rm -f
 	rm -f pCalc
 cleanall: clean
 	cd $(src_dir); rm -f *~
