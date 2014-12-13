@@ -4,9 +4,10 @@ pCalc
 Fortran command line calculator which parses tokens into Reverse Polish Notation and evaluates it. Can take equations to be parsed from stdin or the command line:-
 
   [byornski ~/pCalc]$ ./pCalc
-Input : 3+4+5*17
-Result:  92
-Input : 5^200
+  Input : 3+4+5*17
+  Result:  92
+  Input : 5^200
+  
 Result:  62230152778611417071440640537801242405902521687211671331011166147896988340353834411839448231257136169569665895551224821247160434722900390625
 Input : 2+4*5
 Result:  22
