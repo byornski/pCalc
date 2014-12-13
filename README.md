@@ -14,6 +14,7 @@ Fortran command line calculator which parses tokens into Reverse Polish Notation
     Result:  30
     Input : 17 / 3
     Result:  5
+    
     [byornski ~/pCalc]$ ./pCalc 4 + 5
     9
     [byornski ~/pCalc]$ ./pCalc "17^20"
