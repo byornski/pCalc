@@ -3,7 +3,7 @@ pCalc
 
 Fortran command line calculator which parses tokens into Reverse Polish Notation and evaluates it. Can take equations to be parsed from stdin or the command line:-
 
-`[byornski ~/pCalc]$ ./pCalc
+  [byornski ~/pCalc]$ ./pCalc
 Input : 3+4+5*17
 Result:  92
 Input : 5^200
@@ -17,7 +17,7 @@ Result:  5
 [byornski ~/pCalc]$ ./pCalc 4 + 5
  9
 [byornski ~/pCalc]$ ./pCalc "17^20"
- 4064231406647572522401601`
+ 4064231406647572522401601
 
 
 Uses a bigint library of my own creation. The values are unbounded (up to 10000000^(int64_huge)) and you will run out of memory before you hit this.
