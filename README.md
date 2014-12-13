@@ -17,6 +17,7 @@ Fortran command line calculator which parses tokens into Reverse Polish Notation
     
     [byornski ~/pCalc]$ ./pCalc 4 + 5
     9
+    
     [byornski ~/pCalc]$ ./pCalc "17^20"
     4064231406647572522401601
 
