@@ -2,7 +2,7 @@ pCalc
 =====
 
 Fortran command line calculator which parses tokens into Reverse Polish Notation and evaluates it. Can take equations to be parsed from stdin or the command line:-
-
+~~
 [byornski ~/pCalc]$ ./pCalc
 Input : 3+4+5*17
 Result:  92
@@ -18,15 +18,14 @@ Result:  5
  9
 [byornski ~/pCalc]$ ./pCalc "17^20"
  4064231406647572522401601
-
+~~
 
 Uses a bigint library of my own creation. The values are unbounded (up to 10000000^(int64_huge)) and you will run out of memory before you hit this.
 
 
 
 Operations
-==========
-
+----------
 Currently implemented operators are:
 
 Add 	  	      +
@@ -40,7 +39,7 @@ Unlimited parenthesis levels are allowed as the string are evaluated in reverse 
 
 
 Building
-========
+--------
 Simplying running
 
 make
@@ -50,6 +49,6 @@ should give a copy of pCalc in the root folder. The source files are stored in s
 
 
 Requirements
-============
+------------
 You need a reasonably up to date version of gfortran or ifort. Builds with GCC 4.9.1 but does not with GCC 4.4.7. Also builds properly with Intel 14.0 compiler (ifort). 
 
