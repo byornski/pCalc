@@ -28,12 +28,12 @@ Operations
 ----------
 Currently implemented operators are:
 
-Add 	  	      +
-Subtract              -
-Multiply	      *
-Integer Divide	      /
-Mod                   %
-Exponentiation	      ^
++ Add 	  	      +
++ Subtract              -
++ Multiply	      *
++ Integer Divide	      /
++ Mod                   %
++ Exponentiation	      ^
 
 Unlimited parenthesis levels are allowed as the string are evaluated in reverse polish notation. 
 
