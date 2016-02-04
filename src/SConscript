@@ -1,4 +1,4 @@
 env = Environment(tools=['default','gfortran'],FORTRANMODDIRPREFIX='-J',FORTRANMODDIR='${TARGET.dir}')
 sources = Glob("*.f90")
 
-env.Program('pCalc',sources)
+env.Program('#/pCalc',sources)
