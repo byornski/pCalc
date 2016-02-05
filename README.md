@@ -44,10 +44,9 @@ Building
 --------
 Simplying running
 
-    make
+     scons
 
-should give a copy of pCalc in the root folder. The source files are stored in src/ and temporary build files in obj/. There is a shell script in src to generate the dependencies lists for make so these do not need to be specified manually beyond the use statement in the .f90 file. 
-
+should give a copy of pCalc in the root folder. The source files are stored in src/ and temporary build files in build/. 
 
 
 Requirements
